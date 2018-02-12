@@ -11,7 +11,7 @@ namespace TiendaOnlineMVC.CORE.Domain
     /// <summary>
     /// Entidad de dominio de pedido
     /// </summary>
-    class Order
+    public class Order
     {
         /// <summary>
         /// Identificador

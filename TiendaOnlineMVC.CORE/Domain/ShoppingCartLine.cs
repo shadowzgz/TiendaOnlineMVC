@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace TiendaOnlineMVC.CORE.Domain
     /// <summary>
     /// entidad de cdominio de carrito de la compra
     /// </summary>
+    [Table("ShoppingCart")]
     public class ShoppingCartLine
     {
         /// <summary>
