@@ -64,6 +64,7 @@
     <Compile Include="Domain\ShoppingCartLine.cs" />
     <Compile Include="Enums\DocumentType.cs" />
     <Compile Include="Domain\Tax.cs" />
+    <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

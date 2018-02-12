@@ -9,7 +9,7 @@ using TiendaOnlineMVC.CORE.Domain;
 
 namespace TiendaOnlineMVC.DAL
 {
-    public class DbContext : IdentityDbContext<ApplicationUser>
+    public class DbContext : IdentityDbContext<ApplicationUser>, IDbContext
     {
 
         /// <summary>
