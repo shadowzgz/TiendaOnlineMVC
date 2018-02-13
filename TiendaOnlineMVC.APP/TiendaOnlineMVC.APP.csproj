@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D3EEA80-958A-4473-82C7-826BF3B0639E}</ProjectGuid>
+    <ProjectGuid>{8D77DE07-F22A-491A-B5F2-C05FC64CEC74}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TiendaOnlineMVC.CORE</RootNamespace>
-    <AssemblyName>TiendaOnlineMVC.CORE</AssemblyName>
+    <RootNamespace>TiendaOnlineMVC.APP</RootNamespace>
+    <AssemblyName>TiendaOnlineMVC.APP</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -53,25 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Domain\Address.cs" />
-    <Compile Include="Domain\ApplicationUser.cs" />
-    <Compile Include="Domain\Category.cs" />
-    <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\OrderLine.cs" />
-    <Compile Include="Enums\OrderStatus.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\Document.cs" />
-    <Compile Include="Domain\ShoppingCartLine.cs" />
-    <Compile Include="Enums\DocumentType.cs" />
-    <Compile Include="Domain\Tax.cs" />
-    <Compile Include="Interfaces\ICategoryManager.cs" />
-    <Compile Include="Interfaces\IManager.cs" />
-    <Compile Include="Interfaces\IDbContext.cs" />
-    <Compile Include="Interfaces\IOrderManager.cs" />
-    <Compile Include="Interfaces\IProductManager.cs" />
-    <Compile Include="Interfaces\IShoppingCartManager.cs" />
-    <Compile Include="Interfaces\ITaxManager.cs" />
+    <Compile Include="CategoryManager.cs" />
+    <Compile Include="OrderManager.cs" />
+    <Compile Include="ProductManager.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShoppingCartManager.cs" />
+    <Compile Include="TaxManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TiendaOnlineMVC.CORE\TiendaOnlineMVC.CORE.csproj">
+      <Project>{2d3eea80-958a-4473-82c7-826bf3b0639e}</Project>
+      <Name>TiendaOnlineMVC.CORE</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
