@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaOnlineMVC.CORE.Interfaces;
-using TiendaOnlineMVC.DAL;
 
 namespace TiendaOnlineMVC.APP
 {

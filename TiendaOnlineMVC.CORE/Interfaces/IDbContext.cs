@@ -2,7 +2,7 @@
 using System.Data.Entity.Infrastructure;
 using TiendaOnlineMVC.CORE.Domain;
 
-namespace TiendaOnlineMVC.DAL
+namespace TiendaOnlineMVC.CORE.Interfaces
 {
     /// <summary>
     /// Interfaz del contexto de datos

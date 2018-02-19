@@ -1,7 +1,10 @@
 ﻿
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace TiendaOnlineMVC.CORE.Domain
 {
@@ -10,6 +13,19 @@ namespace TiendaOnlineMVC.CORE.Domain
     /// </summary>
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// Método para crear un usuario asincronamente
+        /// </summary>
+        /// <param name="manager">UserManager</param>
+        /// <returns>Tarea con la identidad</returns>
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
+        {
+            // Tenga en cuenta que el valor de authenticationType debe coincidir con el definido en CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Agregar aquí notificaciones personalizadas de usuario
+            return userIdentity;
+        }
+
         /// <summary>
         /// NIF del cliente
         /// System.ComponentModel.DataAnnotation

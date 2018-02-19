@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaOnlineMVC.CORE.Domain;
+using TiendaOnlineMVC.CORE.Interfaces;
 
 namespace TiendaOnlineMVC.DAL
 {
