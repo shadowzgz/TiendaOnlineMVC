@@ -77,6 +77,6 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(TargetPath)" "$(SolutionDir)\TiendaOnlineMVC.MVC\bin\"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(TargetPath)" "$(SolutionDir)\TiendaOnlineMVC.API\bin\"</PostBuildEvent>
   </PropertyGroup>
 </Project>

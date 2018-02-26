@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaOnlineMVC.APP", "Tien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaOnlineMVC.IFR", "TiendaOnlineMVC.IFR\TiendaOnlineMVC.IFR.csproj", "{5624E0ED-DA4F-45A6-9912-B4A8F38DF5D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaOnlineMVC.MVC", "TiendaOnlineMVC.MVC\TiendaOnlineMVC.MVC.csproj", "{138F666D-4424-417B-AD5E-31305F719691}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TiendaOnlineMVC.API", "TiendaOnlineMVC.API\TiendaOnlineMVC.API.csproj", "{F0BA89C2-DD08-4645-BF3B-92ECC9EB6622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{5624E0ED-DA4F-45A6-9912-B4A8F38DF5D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5624E0ED-DA4F-45A6-9912-B4A8F38DF5D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5624E0ED-DA4F-45A6-9912-B4A8F38DF5D0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{138F666D-4424-417B-AD5E-31305F719691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{138F666D-4424-417B-AD5E-31305F719691}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{138F666D-4424-417B-AD5E-31305F719691}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{138F666D-4424-417B-AD5E-31305F719691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0BA89C2-DD08-4645-BF3B-92ECC9EB6622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BA89C2-DD08-4645-BF3B-92ECC9EB6622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BA89C2-DD08-4645-BF3B-92ECC9EB6622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BA89C2-DD08-4645-BF3B-92ECC9EB6622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

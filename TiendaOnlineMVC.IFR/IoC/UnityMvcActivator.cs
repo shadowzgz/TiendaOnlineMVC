@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Web.Http;
 using System.Web.Mvc;
 
 using Unity.AspNet.Mvc;
@@ -9,7 +10,7 @@ using Unity.AspNet.Mvc;
 namespace TiendaOnlineMVC.IFR.IoC
 {
     /// <summary>
-    /// Provides the bootstrapping for integrating Unity with ASP.NET MVC.
+    /// Provides the bootstrapping for integrating Unity with ASP.NET MVC. Preparamos la clase tanto para MVC como para API
     /// </summary>
     public static class UnityMvcActivator
     {
@@ -22,6 +23,9 @@ namespace TiendaOnlineMVC.IFR.IoC
             FilterProviders.Providers.Add(new UnityFilterAttributeFilterProvider(UnityConfig.Container));
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(UnityConfig.Container));
+
+            //Añadimos esto para el API Añadimos un dependenci resolver que va a pertenecer al webapi
+            GlobalConfiguration.Configuration.DependencyResolver = new Unity.AspNet.WebApi.UnityDependencyResolver(UnityConfig.Container); ;
 
             // TODO: Uncomment if you want to use PerRequestLifetimeManager
             // Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
