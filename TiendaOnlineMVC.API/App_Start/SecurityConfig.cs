@@ -40,7 +40,7 @@ namespace TiendaOnlineMVC.API
                     UserName = UserAdmin,
                     NIF = "100000S",
                     Name = "Super",
-                    Surnames = "Admin",
+                    Surnames = "Admin"
                 };
                 try
                 {
