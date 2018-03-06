@@ -19,7 +19,9 @@ namespace TiendaOnlineMVC.MVC.Controllers
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
-            return View();
+            Connect connect = new Connect(model.UserName, model.Password);
+
+            return RedirectToAction("Index", "Home");
 
         }
     }
