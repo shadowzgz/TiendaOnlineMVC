@@ -1,49 +1,67 @@
-﻿using System;
+﻿using Microsoft.Owin.Security;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web;
+using TiendaOnlineMVC.MVC.Costants;
 
 namespace TiendaOnlineMVC.MVC.Utils
 {
     public class Connect
     {
         public string Url { get; private set; }
-        public string Token { get; private set; }
-        public Connect(string url)
+        public Connect()
         {
 
-            Url = url;
+            this.Url = ConfigurationManager.AppSettings["ApiBaseUri"];
 
         }
-        public Connect(string url, string username, string password):this(url)
+        public Connect(string username, string password):this()
         {
-            Token = GetToken(username, password);
+            GetToken(username, password);
         }
 
-        private string GetToken(string username, string password)
+        private void GetToken(string username, string password)
         {
-            string token = string.Empty;
+            var getTokenUrl = string.Format(ApiEndPoints.GetToken, Url);
             ///el using para establecer un rango de ejecución (IDisposable) se borra de memoria una vez que termina la ejecución
-            using (var client = new HttpClient())
+            using (HttpClient httpClient = new HttpClient())
             {
-                client.BaseAddress = new Uri(Url);
-                client.DefaultRequestHeaders.Accept.Clear();
+                HttpContent content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("grant_type", "password"),
+                    new KeyValuePair<string, string>("username", username),
+                    new KeyValuePair<string, string>("password", password)
+                });
 
-                var formData = new List<KeyValuePair<string, string>>();
-                formData.Add(new KeyValuePair<string, string>("grant_type", "password"));
-                formData.Add(new KeyValuePair<string, string>("username", username));
-                formData.Add(new KeyValuePair<string, string>("password", password));
+                HttpResponseMessage result = httpClient.PostAsync(getTokenUrl, content).Result;
 
-                var request = new HttpRequestMessage(HttpMethod.Post, "/Token");
-                request.Content = new FormUrlEncodedContent(formData);
-                var response = client.SendAsync(request).Result;
-                token = response.Content.ReadAsStringAsync().Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
 
+                var token = JsonConvert.DeserializeObject<Token>(resultContent);
 
+                AuthenticationProperties options = new AuthenticationProperties();
+
+                options.AllowRefresh = true;
+                options.IsPersistent = true;
+                options.ExpiresUtc = DateTime.UtcNow.AddSeconds(token.expires_in);
+
+                var claims = new[]
+                {
+                    new Claim(ClaimTypes.Name, username),
+                    new Claim("AcessToken", string.Format("Bearer {0}", token.access_token)),
+                };
+
+                var identity = new ClaimsIdentity(claims, "ApplicationCookie");
+
+                HttpContext.Current.Request.GetOwinContext().Authentication.SignIn(options, identity);
 
             }
-            return token;
+            
         }
 
     }
