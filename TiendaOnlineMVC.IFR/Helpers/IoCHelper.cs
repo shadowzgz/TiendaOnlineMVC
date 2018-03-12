@@ -17,7 +17,7 @@ namespace TiendaOnlineMVC.IFR.Helpers
         /// </summary>
         /// <typeparam name="T">Tipo a resolver</typeparam>
         /// <returns>Objeto resuelto</returns>
-        public static object Resolve<T>()
+        public static T Resolve<T>()
         {
             return IoC.UnityConfig.Container.Resolve<T>();
         }

@@ -11,6 +11,9 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using TiendaOnlineMVC.API.Models;
 using TiendaOnlineMVC.CORE.Domain;
+using TiendaOnlineMVC.CORE.Interfaces;
+using TiendaOnlineMVC.IFR.Helpers;
+using TiendaOnlineMVC.API.Helper;
 
 namespace TiendaOnlineMVC.API.Providers
 {
@@ -45,7 +48,7 @@ namespace TiendaOnlineMVC.API.Providers
             ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
                 CookieAuthenticationDefaults.AuthenticationType);
 
-            AuthenticationProperties properties = CreateProperties(user.UserName);
+            AuthenticationProperties properties = CreateProperties(user.UserName, user.Id);
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
@@ -87,12 +90,15 @@ namespace TiendaOnlineMVC.API.Providers
             return Task.FromResult<object>(null);
         }
 
-        public static AuthenticationProperties CreateProperties(string userName)
+        public static AuthenticationProperties CreateProperties(string userName, string userid)
         {
             IDictionary<string, string> data = new Dictionary<string, string>
             {
-                { "userName", userName }
+                { "UserName", userName }
             };
+            var urManager = new UserRolManager();
+            data.Add("Roles", string.Join(",", urManager.UserManager.GetRoles(userid)));
+
             return new AuthenticationProperties(data);
         }
     }

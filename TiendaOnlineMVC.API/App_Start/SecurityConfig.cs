@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using TiendaOnlineMVC.API.Helper;
 using TiendaOnlineMVC.CORE.Domain;
 using TiendaOnlineMVC.CORE.Interfaces;
 using TiendaOnlineMVC.IFR.Helpers;
@@ -18,6 +19,8 @@ namespace TiendaOnlineMVC.API
     /// </summary>
     public static class SecurityConfig
     {
+        //Las constantes por defecto son privadas
+        private const string RolAdmin = "Admin";
         private const string UserAdmin = "admin@eshop2018.es";
         private const string PwdAdmin = "123QWEasd@";
 
@@ -27,12 +30,16 @@ namespace TiendaOnlineMVC.API
         /// </summary>
         public static void Configure()
         {
-            //Instanciar context de datos y UserManager
-            var context = IoCHelper.Resolve<IDbContext>();
-            UserManager<ApplicationUser> UserManager = 
-                new UserManager<ApplicationUser>(new UserStore<ApplicationUser>((DbContext)context));
+            //Configuramos seguridad
+            var urManager = new UserRolManager();
 
-            ApplicationUser user = UserManager.FindByName(UserAdmin);
+            //Si no existe el rol Admin , lo crea
+            if (!urManager.RoleManager.RoleExists(RolAdmin))
+                urManager.RoleManager.Create(new IdentityRole(RolAdmin));
+           
+
+            //Buscamos al usuario Admin, si no está lo  creamos.
+            ApplicationUser user = urManager.UserManager.FindByName(UserAdmin);
             if (user == null)
             {
                 user = new ApplicationUser()
@@ -44,14 +51,26 @@ namespace TiendaOnlineMVC.API
                 };
                 try
                 {
-                    IdentityResult result = UserManager.Create(user, PwdAdmin);
-                    if (!result.Succeeded)
+                    IdentityResult result = urManager.UserManager.Create(user, PwdAdmin);
+                    if (result.Succeeded)
+                    {
+                        urManager.UserManager.AddToRole(user.Id, RolAdmin);
+                    }
+                    else
                     {
                         throw new Exception(string.Join(",", result.Errors));
+                        //TODO: Escribir en el log
                     }
                 }catch (Exception ex)
                 {
                     throw ex;
+                }
+            }else
+            {
+                //El usuario está creado. Comprobamos si esta en el rol admin.
+                if (!urManager.UserManager.IsInRole(user.Id, RolAdmin))
+                {
+                    urManager.UserManager.AddToRole(user.Id, RolAdmin);
                 }
             }
         }

@@ -24,5 +24,11 @@ namespace TiendaOnlineMVC.MVC.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+
+        public ActionResult LogOff()
+        {
+            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+            return RedirectToAction("Login");
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web;
 using TiendaOnlineMVC.MVC.Costants;
+using TiendaOnlineMVC.MVC.Security;
 
 namespace TiendaOnlineMVC.MVC.Utils
 {
@@ -23,6 +24,14 @@ namespace TiendaOnlineMVC.MVC.Utils
         public Connect(string username, string password):this()
         {
             GetToken(username, password);
+        }
+
+        public IUserSession UserSession
+        {
+            get
+            {
+                return new UserSession();
+            }
         }
 
         private void GetToken(string username, string password)
@@ -50,12 +59,13 @@ namespace TiendaOnlineMVC.MVC.Utils
                 options.IsPersistent = true;
                 options.ExpiresUtc = DateTime.UtcNow.AddSeconds(token.expires_in);
 
-                var claims = new[]
+                //Todos los datos que me quiero guardar en la cookie
+                var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, username),
                     new Claim("AcessToken", string.Format("Bearer {0}", token.access_token)),
                 };
-
+                claims.AddRange(token.Roles.Split(',').Select(e => new Claim(ClaimTypes.Role, e)));
                 var identity = new ClaimsIdentity(claims, "ApplicationCookie");
 
                 HttpContext.Current.Request.GetOwinContext().Authentication.SignIn(options, identity);

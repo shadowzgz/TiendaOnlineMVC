@@ -12,16 +12,16 @@ namespace TiendaOnlineMVC.MVC.Utils
         /// </summary>
         public string access_token { get; set; }
         /// <summary>
-        /// Tipo de token
-        /// </summary>
-        public string token_type { get; set; }
-        /// <summary>
         /// Tiempo del token
         /// </summary>
         public int expires_in { get; set; }
         /// <summary>
         /// Nombre de usuario
         /// </summary>
-        public string userName { get; set; }
+        public string UserName { get; set; }
+        /// <summary>
+        /// Roles de usuario
+        /// </summary>
+        public string Roles { get; set; }
     }
 }
