@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Web;
 using TiendaOnlineMVC.MVC.Costants;
@@ -74,5 +75,18 @@ namespace TiendaOnlineMVC.MVC.Utils
             
         }
 
+        public T Get<T>(string action)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Add("Authorization", UserSession.BearerToken);
+
+                HttpResponseMessage result = httpClient.GetAsync(Url + action).Result;
+                string resultContent = result.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<T>(resultContent);
+            }
+        }
     }
 }

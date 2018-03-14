@@ -19,6 +19,7 @@ namespace TiendaOnlineMVC.API
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             SecurityConfig.Configure();
+            AutoMapperConfig.Configure();
         }
     }
 }

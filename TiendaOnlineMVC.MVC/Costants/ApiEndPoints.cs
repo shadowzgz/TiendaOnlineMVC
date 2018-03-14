@@ -12,5 +12,10 @@ namespace TiendaOnlineMVC.MVC.Costants
         /// Método para obtener el token
         /// </summary>
         public const string GetToken = "{0}/Token";
+
+        /// <summary>
+        /// Método para obtener todos los products
+        /// </summary>
+        public const string GetProducts = "/api/Product/Products";
     }
 }

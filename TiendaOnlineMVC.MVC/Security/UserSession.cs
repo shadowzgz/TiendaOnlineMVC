@@ -17,7 +17,7 @@ namespace TiendaOnlineMVC.MVC.Security
         /// <inheritdoc/>
         public string BearerToken
         {
-            get { return ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("AcessToken").Value; }
+            get {return ((ClaimsPrincipal)HttpContext.Current.User).FindFirst("AcessToken").Value; }
         }
 
         /// <inheritdoc/>

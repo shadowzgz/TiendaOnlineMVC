@@ -7,6 +7,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using TiendaOnlineMVC.MVC;
 
 namespace TiendaOnlineMVC.MVC
 {
@@ -19,6 +20,7 @@ namespace TiendaOnlineMVC.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.Name;
+            AutomapperConfig.Configure();
             
         }
     }
